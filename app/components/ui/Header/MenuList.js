@@ -17,6 +17,7 @@ const MenuList = ({open,setOpen}) => {
         <div className={`${open ? 'visible opacity-100' : 'invisible opacity-0'} transition-all fixed inset-0 bg-black/50 flex justify-end z-20`}>       
             <aside className={`${!open ? 'translate-x-48' : ''} transition-all duration-500 w-48 bg-amber-400 flex-col items-end p-5`}>
                 <Image
+                alt="close icon"
                 src={closeIcon}
                 width={40}
                 height={40}

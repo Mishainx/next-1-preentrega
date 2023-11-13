@@ -9,6 +9,7 @@ const SearchInput = () => {
     return (
         <div className="flex ml-auto px-7 ">
             <Image
+            alt="zoom icon"
             src={zoomIcon}
             width={25}
             height={25}

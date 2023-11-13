@@ -12,6 +12,7 @@ export default function Item({product}) {
       <div className="before:absolute before:inset-0 before:h-8 before:bg-amber-400 before:content-['']"></div>
         <Link href={`/product/${slug}`} className="z-10">
           <Image
+          alt={description}
           src={img}
           width={200}
           height={200}

@@ -10,6 +10,7 @@ const Logo = () => {
         <Link href="/" className="">
         <div className="flex flex-row justify-center items-center text-xs">
         <Image
+            alt="mate y venga logo"
             src={mate}
             width={40}
             height={40}

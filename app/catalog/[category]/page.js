@@ -1,5 +1,7 @@
 import Item from "@/app/components/products/Item"
 import { mockData } from "@/data/products"
+import Link from "next/link"
+import Image from "next/image"
 
 export const generateMetadata = async ({params}) => {
     return {
@@ -14,13 +16,13 @@ export default function ItemList({params}) {
 
 
     return (
-        <div className="flex flex-row text-xs flex-wrap justify-center">
+        <div className="h-96 flex flex-row text-xs flex-wrap justify-center items-center">
             {
             products?.length > 0?
             products.map((product,i)=>
                 <Item key={i} product={product} />)
                 :
-                <p>no hay productos seleccionados</p>
+                <p>no hay productos seleccionados</p>  
             }
         </div>
     )

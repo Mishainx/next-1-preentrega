@@ -12,6 +12,7 @@ export default function ItemDetail({product}) {
     <div className="flex flex-row justify-center space-x-5 py-5">
         <Link href={"/catalog"}>
             <Image
+            alt="back icon"
             src={backIcon}
             width={25}
             className="h-5 bg-amber-400 rounded-full"
@@ -22,6 +23,7 @@ export default function ItemDetail({product}) {
         <div className="relative bg-white overflow-hidden rounded-lg shadow-md flex flex-col items-center w-40 m-4">
         <div className="before:absolute before:inset-0 before:h-8 before:bg-amber-400 before:content-['']"></div>
         <Image
+        alt={description}
         src={img}
         width={200}
         height={200}
