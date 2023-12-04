@@ -26,7 +26,7 @@ const AdminProducts = () => {
             {products.map((product, index) => (
               <tr key={index}>
                 <td className="border border-gray-300 p-2">
-                  <img
+                  <IMAGE
                     src={product.img}
                     alt={`Miniatura de ${product.title}`}
                     className="w-12 h-12 object-cover rounded m-auto"

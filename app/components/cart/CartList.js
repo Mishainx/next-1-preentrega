@@ -42,7 +42,7 @@ const CartView = ({cart,removeFromCart}) => {
           {cart.map((cartItem, index) => (
             <tr key={index}>
               <td className="border border-gray-300 p-2">
-                <img
+                <Image
                   src={cartItem.product.img}
                   alt={`Miniatura de ${cartItem.product.title}`}
                   className="w-12 h-12 object-cover rounded m-auto"

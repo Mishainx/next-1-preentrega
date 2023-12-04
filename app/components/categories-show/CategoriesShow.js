@@ -12,6 +12,7 @@ export default async function CategoriesShow() {
           <Image
             src={pokemon}
             layout="responsive"
+            alt="Imagen categoría Pokemón"
             maxWidth={300}
             width={300}
             height={200}
@@ -30,6 +31,7 @@ export default async function CategoriesShow() {
           <Image
             src={disney}
             layout="responsive"
+            alt="Imagen categoría Disney"
             width={300}
             height={200}
             className="relative top-0 transition-opacity duration-300"
@@ -46,6 +48,7 @@ export default async function CategoriesShow() {
         <div className="category relative flex-1 group">
           <Image
             src={dbz}
+            alt="Imagen categoría Dragón Ball"
             layout="responsive"
             width={300}
             height={200}
