@@ -8,7 +8,7 @@ const Counter = ({quantity, setQuantity}) => {
     };
   
     const handleDecrement = () => {
-      if (quantity > 0) {
+      if (quantity > 1) {
         setQuantity(quantity-1)
       }
     };
