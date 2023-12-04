@@ -1,16 +1,15 @@
 'use Client'
 import { useState } from "react";
 
-const Counter = () => {
-    const [count, setCount] = useState(0);
+const Counter = ({quantity, setQuantity}) => {
   
     const handleIncrement = () => {
-      setCount(count + 1);
+      setQuantity(quantity+1)
     };
   
     const handleDecrement = () => {
-      if (count > 0) {
-        setCount(count - 1);
+      if (quantity > 0) {
+        setQuantity(quantity-1)
       }
     };
   
@@ -22,7 +21,7 @@ const Counter = () => {
         >
           -
         </button>
-        <span className="font-bold">{count}</span>
+        <span className="font-bold">{quantity}</span>
         <button
           onClick={handleIncrement}
           className="bg-amber-400 px-3 py-1 rounded-md ml-2"

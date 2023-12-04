@@ -7,7 +7,7 @@ import closeIcon from "@/public/assets/icons/close-icon.svg"
 const MenuList = ({open,setOpen}) => {
     const pages = [
         { name: 'Inicio', href: '/' },
-        {name: 'Productos', href:'/catalog'},
+        {name: 'Productos', href:'/products'},
         {name: 'Mis compras', href:'/cart'} //{ name: 'About', href: '#about' },
     ]
 

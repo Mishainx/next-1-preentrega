@@ -1,5 +1,5 @@
-import ItemListContainer from "./components/products/ItemListContainer";
-import Button from "./components/ui/Button";
+import ItemList from "./components/products/ItemList";
+import CategoriesShow from "./components/categories-show/CategoriesShow";
 
 export const metadata ={
   title:"Mate y venga",
@@ -11,11 +11,14 @@ export const metadata ={
   }
 }
 
-export default function Home() {
+export default async function Home() {
+  const response = await fetch(`http:/localhost:3000/api/products`)
+  const items = await response.json()
+    
   return (
-    <main className="">
-            <ItemListContainer/>
-            <Button/>
+    <main className="min-h-screen	flex flex-col justify-center items-center">
+              <CategoriesShow/>
+              <ItemList items={items}/>
     </main>
   )
 }

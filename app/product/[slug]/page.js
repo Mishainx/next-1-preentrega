@@ -1,5 +1,5 @@
 import ItemDetail from "@/app/components/products/ItemDetail"
-import { mockData } from "@/data/products"
+import { Suspense } from "react"
 
 export const generateMetadata = async ({params}) => {
   return {
@@ -7,23 +7,30 @@ export const generateMetadata = async ({params}) => {
   }
 }
 
-export default function ProductDetail({params}) {
-  const {slug} = params
-  const product = slug?mockData.find(product => product.slug === slug):undefined
-
+export default async function ProductDetail({params}) {
+    const {slug} = params
+    const response = await fetch(`http:/localhost:3000/api/product/${slug}`,
+    {
+        cache:"no-store"
+    })
+    let item;
+    response.status != 200?
+    item = null
+    :    
+    item = await response.json()
 
     return (
-        <main className="h-96">
-            <div className="flex flex-row text-xs flex-wrap justify-center">
-                
-                {
-                product?
-                <ItemDetail key={slug} product={product}/>
-                :
-                <p>no hay productos seleccionados</p>
-                }
-                
-            </div>
+        <main className="h-96 flex flex-col justify-center items-center">
+            <Suspense fallback={<p>cargando...</p>}>
+                <div className="flex flex-col text-xs flex-wrap justify-center items-center">
+                    {
+                    item?
+                    <ItemDetail key={slug} product={item}/>
+                    :
+                    <p>No existe un producto con ese código</p>
+                    }
+                </div>
+            </Suspense>   
         </main>
     )
 }

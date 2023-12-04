@@ -1,4 +1,3 @@
-import { mockData } from "@/data/products"
 import editIcon from "@/public/assets/icons/edit-icon.svg"
 import deleteIcon from "@/public/assets/icons/delete-icon.svg"
 import Image from "next/image"

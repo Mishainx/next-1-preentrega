@@ -4,13 +4,36 @@ import Counter from "../ui/Counter";
 import Button from "../ui/Button";
 import backIcon from "@/public/assets/icons/back-icon.svg"
 import Link from "next/link";
+import { useCartContext } from "../context/CartContext";
+import { useState } from "react";
+import { toast } from "react-toastify";
+
+const toastNotify = () => toast('Producto agregado', { hideProgressBar: true, autoClose: 2000, type: 'success' })
+
+
 
 export default function ItemDetail({product}) {
     const {title,description,price,img,category,slug,stock} = product     
-    
+    const [quantity, setQuantity] = useState(0);
+    const {cart,addToCart,isInCart,updateCartQuantity} = useCartContext()
+
+    const handleAdd = async()=>{
+        let newQuantity
+        const productFind = await isInCart(slug)
+        if(!productFind){
+          addToCart({product,quantity})
+        }
+        else{
+          newQuantity = productFind.quantity+quantity
+          updateCartQuantity(slug,newQuantity)
+        }
+        setQuantity(0)  
+        toastNotify()
+      }
+
     return (
     <div className="flex flex-row justify-center space-x-5 py-5">
-        <Link href={"/catalog"}>
+        <Link href={"/products"}>
             <Image
             alt="back icon"
             src={backIcon}
@@ -35,12 +58,13 @@ export default function ItemDetail({product}) {
             <p>{`$ ${price}`}</p>
             </div>
         </div>
-        <Counter/>
+        <Counter quantity={quantity} setQuantity={setQuantity}/>
         <Button
-        className="bg-amber-400 overflow-hidden w-full py-1 mt-4 hover:text-white"
-        >
-            Agregar
-        </Button>
+      className="bg-amber-400 overflow-hidden w-full py-1 mt-4 hover:text-white"
+      onClick={()=>handleAdd()}
+      >
+        Agregar
+      </Button>
         </div>
         <div className="py-5">
             <h3 className="font-bold text-amber-500">

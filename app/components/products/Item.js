@@ -3,10 +3,27 @@ import Image from "next/image";
 import Counter from "../ui/Counter";
 import Button from "../ui/Button";
 import Link from "next/link";
+import { useState} from "react";
+import { useCartContext } from "../context/CartContext";
 
 export default function Item({product}) {
     const {title,description,price,img,slug} = product     
-    console.log(img)
+    const [quantity, setQuantity] = useState(0);
+    const {cart, isInCart,addToCart,updateCartQuantity} = useCartContext()
+
+      const handleAdd = async()=>{
+        let newQuantity
+        const productFind = await isInCart(slug)
+        if(!productFind){
+          addToCart({product,quantity})
+        }
+        else{
+          newQuantity = productFind.quantity+quantity
+          updateCartQuantity(slug,newQuantity)
+        }
+        setQuantity(0)
+      }
+
     return (
       <div className="relative bg-white overflow-hidden rounded-lg shadow-md flex flex-col items-center w-40 m-4	">
       <div className="before:absolute before:inset-0 before:h-8 before:bg-amber-400 before:content-['']"></div>
@@ -26,12 +43,15 @@ export default function Item({product}) {
           <Link href={`/product/${slug}`}><p className="text-amber-400">Ver detalle</p></Link>
         </div>
       </div>
-      <Counter/>
+      <Counter quantity={quantity} setQuantity={setQuantity}
+      
+      />
       <Button
       className="bg-amber-400 overflow-hidden w-full py-1 mt-4 hover:text-white"
+      onClick={()=>handleAdd()}
       >
         Agregar
-      </Button>
+      </Button>      
     </div>
     );
 

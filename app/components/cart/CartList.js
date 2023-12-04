@@ -1,19 +1,25 @@
-import { mockCartData } from "@/data/mockCartData";
 import Image from "next/image";
 import deleteIcon from "@/public/assets/icons/delete-icon.svg";
+import { useCartContext } from "../context/CartContext";
 
-const CartView = () => {
+
+const CartView = ({cart,removeFromCart}) => {
+
   const calculateSubtotal = (quantity, price) => {
     return quantity * price;
   };
 
   const calculateTotal = () => {
-    return mockCartData.reduce(
+    return cart.reduce(
       (total, cartItem) =>
         total + calculateSubtotal(cartItem.quantity, cartItem.product.price),
       0
     );
   };
+
+  const handleDelete = (slug) =>{
+    removeFromCart(slug)
+  }
 
   return (
     <div className="w-full">
@@ -33,7 +39,7 @@ const CartView = () => {
           </tr>
         </thead>
         <tbody>
-          {mockCartData.map((cartItem, index) => (
+          {cart.map((cartItem, index) => (
             <tr key={index}>
               <td className="border border-gray-300 p-2">
                 <img
@@ -60,6 +66,7 @@ const CartView = () => {
                   src={deleteIcon}
                   width={40}
                   className="bg-amber-400 rounded-full p-1 m-auto"
+                  onClick={()=>removeFromCart(cartItem.product.slug)}
                 />
               </td>
             </tr>
