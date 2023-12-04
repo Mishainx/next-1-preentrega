@@ -3,10 +3,10 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 export default{
-    API_KEY: process.env.apikey,
-    AUTH_DOMAIN: process.env.autuDomain,
-    PROJECT_ID: process.env.projectId,
-    STORAGE_BUCKET: process.env.storageBucket,
-    MESSAGING_SENDER_ID: process.env.messaggingSenderId,
-    APP_ID: process.env.appId
+    API_KEY: process.env.API_KEY,
+    AUTH_DOMAIN: process.env.AUTH_DOMAIN,
+    PROJECT_ID: process.env.PROJECT_ID,
+    STORAGE_BUCKET: process.env.STORAGE_BUCKET,
+    MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
+    APP_ID: process.env.APP_ID
 }
