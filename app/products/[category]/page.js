@@ -4,9 +4,10 @@ import { Suspense } from "react"
 export const generateMetadata = async ({params}) => {
     return {
         title: 'Mate y venga - ' + params.category,
-        description: "Búsqueda de mates por categoría"
+        description: "Búsqueda de mates por categoría",
+        }
     }
-}
+
 
 export async function generateStaticParams (){ 
     return [

@@ -3,7 +3,8 @@ import { Suspense } from "react"
 
 export const generateMetadata = async ({params}) => {
   return {
-      title: 'Mate y venga - ' + params.slug
+      title: 'Mate y venga - ' + params.slug,
+      description: 'Detalle de producto'
   }
 }
 

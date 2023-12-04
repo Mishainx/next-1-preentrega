@@ -3,9 +3,8 @@ export const generateMetadata = async () => {
   return {
       title: 'Catálogo',
       description: "Catálogo de mates"
+    }
   }
-}
-
 
 
 export default async function Products() {
