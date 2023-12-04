@@ -63,6 +63,7 @@ const CartView = ({cart,removeFromCart}) => {
               </td>
               <td className="border border-gray-300 p-2">
                 <Image
+                alt="delete icon"
                   src={deleteIcon}
                   width={40}
                   className="bg-amber-400 rounded-full p-1 m-auto"
