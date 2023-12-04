@@ -1,7 +1,4 @@
-'use client'
-
 import AdminPanel from "../components/adminPanel/AdminPanel";
-
 
 export const generateMetadata = async () => {
   return {
