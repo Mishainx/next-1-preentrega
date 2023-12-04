@@ -14,7 +14,7 @@ const toastNotify = () => toast('Producto agregado', { hideProgressBar: true, au
 
 export default function ItemDetail({product}) {
     const {title,description,price,img,category,slug,stock} = product     
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const {cart,addToCart,isInCart,updateCartQuantity} = useCartContext()
 
     const handleAdd = async()=>{

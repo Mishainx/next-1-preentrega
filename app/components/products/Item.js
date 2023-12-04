@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 export default function Item({product}) {
     const {title,description,price,img,slug} = product     
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const {cart, isInCart,addToCart,updateCartQuantity} = useCartContext()
 
     const toastNotify = () => toast('Producto agregado', { hideProgressBar: true, autoClose: 2000, type: 'success' })
@@ -25,7 +25,7 @@ export default function Item({product}) {
           newQuantity = productFind.quantity+quantity
           updateCartQuantity(slug,newQuantity)
         }
-        setQuantity(0)
+        setQuantity(1)
 
         toastNotify()
       }
