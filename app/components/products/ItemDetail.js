@@ -27,7 +27,7 @@ export default function ItemDetail({product}) {
           newQuantity = productFind.quantity+quantity
           updateCartQuantity(slug,newQuantity)
         }
-        setQuantity(0)  
+        setQuantity(1)  
         toastNotify()
       }
 
