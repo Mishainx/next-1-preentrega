@@ -1,6 +1,7 @@
 import Image from "next/image";
 import deleteIcon from "@/public/assets/icons/delete-icon.svg";
 import { useCartContext } from "../context/CartContext";
+import { toast } from "react-toastify";
 
 
 const CartView = ({cart,removeFromCart}) => {
@@ -20,6 +21,9 @@ const CartView = ({cart,removeFromCart}) => {
   const handleDelete = (slug) =>{
     removeFromCart(slug)
   }
+
+  const toastNotify = () => toast('Compra finalizada', { hideProgressBar: true, autoClose: 2000, type: 'success' })
+
 
   return (
     <div className="w-full">
@@ -43,6 +47,8 @@ const CartView = ({cart,removeFromCart}) => {
             <tr key={index}>
               <td className="border border-gray-300 p-2">
                 <Image
+                  width={50}
+                  height={60}
                   src={cartItem.product.img}
                   alt={`Miniatura de ${cartItem.product.title}`}
                   className="w-12 h-12 object-cover rounded m-auto"
@@ -67,7 +73,7 @@ const CartView = ({cart,removeFromCart}) => {
                   src={deleteIcon}
                   width={40}
                   className="bg-amber-400 rounded-full p-1 m-auto"
-                  onClick={()=>removeFromCart(cartItem.product.slug)}
+                  onClick={()=>handleDelete(cartItem.product.slug)}
                 />
               </td>
             </tr>
@@ -78,7 +84,10 @@ const CartView = ({cart,removeFromCart}) => {
         <div className="text-xl font-bold">
           Total: $ {calculateTotal()}
         </div>
-        <button className="bg-amber-400 text-white py-1 px-3 rounded ml-4">
+        <button
+        className="bg-amber-400 text-white py-1 px-3 rounded ml-4"
+        onClick={()=>toastNotify()}
+        >
           Finalizar Compra
         </button>
       </div>
