@@ -1,5 +1,5 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/firebase/config";
+import { collection, getDocs,doc,setDoc } from "firebase/firestore";
+import { db} from "@/firebase/config";
 import { NextResponse } from "next/server";
 
 export const GET = async () =>{
@@ -15,11 +15,15 @@ export const GET = async () =>{
 }
 
 
-export const POST = async (request, params) => {
+export const POST = async (request) => {
     try {
-  
-      return NextResponse.json("ok");
+      const values = await request.json()
+      const docRef = doc(db,"products", values.slug)
+      setDoc(docRef,{...values}).then(()=>console.log("producto agregado"))
+      
+      return NextResponse.json({message:"producto agregado"},{status:201});
     } catch (error) {
       console.log(error);
+      throw error
     }
-  };
+};

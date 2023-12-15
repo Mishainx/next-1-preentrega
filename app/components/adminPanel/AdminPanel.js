@@ -1,40 +1,126 @@
-'use client'
-import Form from "../ui/Form"
-import { useState } from "react"
-import AdminTools from "./AdminTools"
-import AdminProducts from "./AdminProducts"
-import AdminUsers from "./AdminUser"
+"use client"
+// components/AdminPanel.js
+import React from 'react';
+import Image from "next/image";
+import editIcon from "@/public/assets/icons/edit-icon.svg";
+import deleteIcon from "@/public/assets/icons/delete-icon.svg";
+import Link from 'next/link';
+import { useEffect,useState } from 'react';
+
+import { toast } from "react-toastify";
 
 
-const AdminPanel = () => {
+const toastNotifySuccess = () => toast('Producto elimnado exitósamente', { hideProgressBar: true, autoClose: 2000, type: 'success' })
+const toastNotifyError = () => toast('Error al eliminar el producto', { hideProgressBar: true, autoClose: 2000, type: 'success' })
 
-    const[auth, setAuth] = useState(false)
-    const [tool, setTool] = useState("products")
 
-    const handleAuth = () =>{
-        setAuth(true)
-    }
+const AdminPanel = async () => {
 
-    const handleTool = (value) =>{
-        setTool(value)
-    }
+    const [products, setProducts] = useState([]);
+
+
+    const handleDelete = async (slug) => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/product/${slug}`, {
+          method: 'DELETE'
+        });
+  
+        if (response.ok) {
+          toastNotifySuccess();
+          setProducts((prevProducts) => prevProducts.filter((product) => product.slug !== slug));
+
+        } else {
+          toastNotifyError();
+          throw new Error(`Error al eliminar producto: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Error al eliminar el producto:', error);
+        throw new Error('Error interno del servidor');
+      }
+    };
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://localhost:3000/api/products`, { revalidate: 0 });
+          if (response.ok) {
+            const productsData = await response.json();
+            setProducts(productsData);
+          } else {
+            throw new Error(`Error al obtener productos: ${response.status}`);
+          }
+        } catch (error) {
+          console.error('Error al obtener productos:', error);
+        }
+      };
+  
+      fetchData();
+    }, []);
 
     return (
-        !auth?
-        <Form handleAuth={handleAuth}/>
-        :
-        <section className="w-full flex flex-row  border-2 border-amber-400">
-            <div className="w-28 h-96 flex items-center border-amber-400">
-                <AdminTools handleTool={handleTool}/>   
-            </div>
-            <div className=" w-full flex flex-col h-96 text-xs text-center overflow-y-scroll">
-            {tool === "products"?
-                <AdminProducts/>
-                :
-                <AdminUsers/>}
-            </div>
-        </section>
-    )
-}
+        <div className="h-96 overflow-y-scroll max-w-full mx-auto p-8">
+            <h2 className="text-3xl font-semibold mb-4">Gestión de Productos</h2>
+            <Link href="/admin/products/create">
+                <button className="bg-green-500 text-white py-2 px-4 my-4 rounded mt-4">
+                    Agregar Producto
+                </button>
+            </Link>
+            <table className="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th className="border border-gray-300 p-2">Imagen</th>
+                        <th className="border border-gray-300 p-2">Título del Producto</th>
+                        <th className="border border-gray-300 p-2">Slug</th>
+                        <th className="border border-gray-300 p-2">Precio</th>
+                        <th className="border border-gray-300 p-2">Stock</th>
+                        <th className="border border-gray-300 p-2">Categoría</th>
+                        <th className="border border-gray-300 p-2"></th>
+                        <th className="border border-gray-300 p-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {products.map((product, index) => (
+                        <tr key={index}>
+                            <td className="border border-gray-300 p-2">
+                                <Image
+                                    src={product.img}
+                                    width={50}
+                                    height={50}
+                                    alt={`Miniatura de ${product.title}`}
+                                    className="w-12 h-12 object-cover rounded m-auto"
+                                />
+                            </td>
+                            <td className="border border-gray-300 p-2">{product.title}</td>
+                            <td className="border border-gray-300 p-2">{product.slug}</td>
+                            <td className="border border-gray-300 p-2">$ {product.price}</td>
+                            <td className="border border-gray-300 p-2">{product.stock}</td>
+                            <td className="border border-gray-300 p-2">{product.category}</td>
+                            <td className="border border-gray-300 p-2">
+                                <Link href={`/admin/product/${product.slug}`}>
+                                    <Image
+                                        alt="edit icon"
+                                        src={editIcon}
+                                        width={40}
+                                        className="bg-amber-400 rounded-full p-1 m-auto"
+                                    />
+                                </Link>
+                            </td>
+                            <td className="border border-gray-300 p-2">
+                                <Image
+                                    alt="delete icon"
+                                    src={deleteIcon}
+                                    width={40}
+                                    onClick={()=>handleDelete(product.slug,setProducts)}
+                                    className="bg-amber-400 rounded-full p-1 m-auto"
+                                />
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+};
 
-export default AdminPanel
+export default AdminPanel;
+
