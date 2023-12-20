@@ -1,4 +1,3 @@
-"use client"
 import EditForm from "@/app/components/adminPanel/EditForm"
 
 export default async function EditProduct({params}) {
