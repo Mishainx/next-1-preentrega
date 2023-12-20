@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import Logo from "../components/ui/Logo"
+import Button from "../components/ui/Button"
 
 
 export default function Error({ error, reset }) {
