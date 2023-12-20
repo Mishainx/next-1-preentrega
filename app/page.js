@@ -10,7 +10,8 @@ export const metadata ={
 export default async function Home() {
   const response = await fetch(`https:/${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`,{cache:"no-cache"})
   const items = await response.json()
-    
+  console.log(items, "consoleado")  
+
   return (
     <main className="min-h-screen	flex flex-col justify-center items-center">
               <CategoriesShow/>
