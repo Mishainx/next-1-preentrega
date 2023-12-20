@@ -25,7 +25,7 @@ export const AuthProvider = ({children}) => {
     
 
     const createUser = async (values) => {
-        const addUser = await fetch(`https://${process.env.VERCEL_URL}/api/users`,{
+        const addUser = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/users`,{
             method:"POST",
             headers: {
                 "Content-Type": "application/json",
@@ -57,13 +57,13 @@ export const AuthProvider = ({children}) => {
     }
 
     const userFind = async (uid) => {
-        const findUser = await fetch( `https://${process.env.VERCEL_URL}/api/users/${uid} `)   
+        const findUser = await fetch( `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/users/${uid} `)   
         const userData = await findUser.json()
         return userData
     };
 
     const userRole = async (uid) => {
-        const findUser = await fetch( `http://${process.env.VERCEL_URL}/api/users/${uid} `)   
+        const findUser = await fetch( `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/users/${uid} `)   
         const userData = await findUser.json()
         const userRole = userData.role
         return userRole
