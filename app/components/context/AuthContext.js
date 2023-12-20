@@ -3,8 +3,8 @@ import { auth } from "@/firebase/config"
 import { signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { createContext, useContext, useEffect, useState } from "react"
 import { toast } from "react-toastify";
-
-
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const toastNotifySuccess = () => toast('Usuario creado', { hideProgressBar: true, autoClose: 2000, type: 'success' })
 const toastNotifyError = () => toast('Error al crear el usuario', { hideProgressBar: true, autoClose: 2000, type: 'success' })
@@ -13,6 +13,7 @@ const AuthContext = createContext()
 export const useAuthContext = () => useContext(AuthContext)
 
 export const AuthProvider = ({children}) => {
+    const router = useRouter()
     const [user, setUser] = useState({
         logged: null,
         email: null,
@@ -34,7 +35,14 @@ export const AuthProvider = ({children}) => {
             })       
 })
             if (addUser.status === 201) {
-                toastNotifySuccess();
+                Swal.fire({
+                    title: "Usuario creado!",
+                    confirmButtonText: 'ok',
+                  }).then((result)=>{
+                    if (result.isConfirmed) {
+                      router.push("/login");
+                    }
+                  })
             } else {
                 toastNotifyError();
 }
@@ -68,10 +76,8 @@ export const AuthProvider = ({children}) => {
                     logged: true,
                     email: user.email,
                     uid: user.uid,
-                    role: await userRole(user.uid)
+                    role: user.uid?await userRole(user.uid):null
                 })
-
-
             } else {
                 setUser({
                     logged: false,

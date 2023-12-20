@@ -1,9 +1,13 @@
-"use client"
-
 import { useState } from "react";
 import { storage } from "@/firebase/config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { categoryValidate, priceValidate, stockValidate, titleValidate,descriptionValidate } from "@/src/utils";
 
+const toastNotifyError = () => toast('Error al actualizar el producto', { hideProgressBar: true, autoClose: 2000, type: 'error' })
+const toastNotifyErrorForm= (error) => toast( ` Error al actualizar el producto: ${error} inválido ` , { hideProgressBar: true, autoClose: 2000, type: 'error' })
 
 const handleImage = async(slug, file) =>{
     const storageRef = ref(storage,slug)
@@ -12,9 +16,22 @@ const handleImage = async(slug, file) =>{
     return fileUrl
 }
 
-const updateProduct = async (slug, values,file,img) => {
+const EditForm = ({ item }) => {
+    const { title, description, stock, price, category, img } = item;
+    const [values, setValues] = useState({ title, description, stock, price, category, img });
+    const [file, setFile] = useState(null);
+    const router = useRouter()
 
-    const fileUrl = handleImage(slug,file)
+    const fieldsToValidate = [
+        { name: "title", validator: titleValidate, errorMessage: "title" },
+        { name: "price", validator: priceValidate, errorMessage: "price inválido" },
+        { name: "stock", validator: stockValidate, errorMessage: "stock" },
+        { name: "category", validator: categoryValidate, errorMessage: "category" },
+        { name: "description", validator: descriptionValidate, errorMessage: "description" },
+      ];
+
+    
+const updateProduct = async (slug, values,file,img) => {
 
     const updateFetch = await fetch(`http://localhost:3000/api/product/${slug}`, { 
         method:"PUT",
@@ -30,12 +47,20 @@ const updateProduct = async (slug, values,file,img) => {
             img: file?await handleImage(slug,file):values.img
           }),
     });
+    if(updateFetch.status == 200){
+        Swal.fire({
+            title: "Producto Actualizado!",
+            confirmButtonText: 'ok',
+          }).then((result)=>{
+            if (result.isConfirmed) {
+              router.push("/admin");
+            }
+          })
+      }
+      else{
+        toastNotifyError()
+      }
 };
-
-const EditForm = ({ item }) => {
-    const { title, description, stock, price, category, img } = item;
-    const [values, setValues] = useState({ title, description, stock, price, category, img });
-    const [file, setFile] = useState(null);
 
     const handleChange = (e) => {
         setValues({
@@ -46,6 +71,14 @@ const EditForm = ({ item }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        for (const field of fieldsToValidate) {
+            const isValid = field.validator(values[field.name]);
+            if (!isValid) {
+              toastNotifyErrorForm(field.errorMessage);
+              return;
+            }
+          }
 
         await updateProduct(item.slug, values,file, img);
     };

@@ -9,9 +9,10 @@ import { useCartContext } from "../context/CartContext";
 import { toast } from "react-toastify";
 import { useAuthContext } from "../context/AuthContext";
 import Swal from 'sweetalert2'
-
+import { useRouter } from "next/navigation";
 
 export default function Item({ product }) {
+  const router = useRouter()
   const { title, description, stock, price, img, slug } = product;
   const [quantity, setQuantity] = useState(1);
   const { cart, addToCart } = useCartContext();
@@ -41,7 +42,11 @@ export default function Item({ product }) {
       Swal.fire({
         title: "Registrate para comprar tu mate!",
         showCancelButton: true,
-        confirmButtonText: '<a href="http://www.localhost:3000/users/register">Registrarme</a>',
+        confirmButtonText: 'Registrarme',
+      }).then((result)=>{
+        if (result.isConfirmed) {
+          router.push("/users/register");
+        }
       })
       return
     }

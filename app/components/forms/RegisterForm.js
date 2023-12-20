@@ -3,8 +3,22 @@
 import Button from "@/app/components/ui/Button"
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
+import {isValidName,isValidSurname,isValidTelephone,isValidEmail, isValidPassword} from "@/src/utils";
+import { toast } from "react-toastify";
+
+
+const toastNotifyError = () => toast('Error al crear el usuario', { hideProgressBar: true, autoClose: 2000, type: 'error' })
+const toastNotifyErrorForm= (error) => toast( ` Error al crear el usuario: ${error} inválido ` , { hideProgressBar: true, autoClose: 2000, type: 'error' })
 
 const RegisterForm = () =>{
+
+    const fieldsToValidate = [
+        { name: "name", validator: isValidName, errorMessage: "Nombre inválido" },
+        { name: "surname", validator: isValidSurname, errorMessage: "Apellido inválido" },
+        { name: "telephone", validator: isValidTelephone, errorMessage: "Teléfono inválido" },
+        { name: "email", validator: isValidEmail, errorMessage: "Email inválido" },
+        { name: "password", validator: isValidPassword, errorMessage: "Contraseña inválida" },
+      ];
 
     const { createUser } = useAuthContext();
     const [values, setValues] = useState({
@@ -27,6 +41,18 @@ const RegisterForm = () =>{
 
       const handleSubmit = async (e) => {
         e.preventDefault();
+            // Validaciones
+    for (const field of fieldsToValidate) {
+        const isValid = field.validator(values[field.name]);
+        if (!isValid) {
+          toastNotifyErrorForm(field.errorMessage)
+          return;
+        }
+      }
+
+      await createUser(values)
+
+
 
       }; 
 
@@ -36,6 +62,7 @@ const RegisterForm = () =>{
             onSubmit={handleSubmit}
             >
                 <input 
+                    required
                     type="text" 
                     name="name" 
                     placeholder="Nombre" 
@@ -45,6 +72,7 @@ const RegisterForm = () =>{
 
                 />
                 <input 
+                    required
                     type="text" 
                     name="surname" 
                     placeholder="Apellido" 
@@ -53,6 +81,7 @@ const RegisterForm = () =>{
                     onChange={handleChange}
                 />
                 <input 
+                    required
                     type="number" 
                     name="telephone" 
                     placeholder="Telefono" 
@@ -69,6 +98,7 @@ const RegisterForm = () =>{
                     onChange={handleChange}
                  />
                 <input 
+                    required
                     type='password'
                     placeholder="Contraseña"
                     name="password"
@@ -79,7 +109,6 @@ const RegisterForm = () =>{
                 <Button
                 className="bg-amber-400 rounded-md p-1 text-xs hover:text-white"
                 type="submit"
-                onClick={()=>createUser(values)}
                 >
                     Enviar
                 </Button>

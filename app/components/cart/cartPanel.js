@@ -31,9 +31,9 @@ const CartPanel = async() => {
           <p>{userData.email}</p>
           <p>{userData.telephone}</p>
         </div>
-        <div className="w-full flex flex-col justify-center items-center border-amber-400">
-          {showTickets ? <TicketList /> : <CartList cart={cart.items} removeFromCart={removeFromCart} buyCart={buyCart} getTicket={getTicket} />}
-        </div>
+          <div className="w-full flex flex-col justify-center items-center border-amber-400">
+            {showTickets ? <TicketList /> : <CartList cart={cart.items} removeFromCart={removeFromCart} buyCart={buyCart} getTicket={getTicket} />}
+          </div>
       </div>
     </section>
   );

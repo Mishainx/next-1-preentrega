@@ -33,8 +33,6 @@ export default async function ItemDetail({ product }) {
     toastNotify();
   };
 
-  console.log(totalInCart)
-
   return (
     <div className="flex flex-row justify-center space-x-5 py-5">
       <Link href={"/products"}>
