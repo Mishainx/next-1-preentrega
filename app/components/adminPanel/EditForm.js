@@ -33,7 +33,7 @@ const EditForm = ({ item }) => {
     
 const updateProduct = async (slug, values,file,img) => {
 
-    const updateFetch = await fetch(`http://localhost:3000/api/product/${slug}`, { 
+    const updateFetch = await fetch(`http://${process.env.VERCEL_URL}/api/product/${slug}`, { 
         method:"PUT",
         headers:{
             "Content-Type": "application/json",

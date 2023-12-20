@@ -59,7 +59,7 @@ const CreateForm = () => {
 
     const image = await handleImage()
 
-    const createProduct = await fetch("http://localhost:3000/api/products", {
+    const createProduct = await fetch( `http://${process.env.VERCEL_URL}/api/products `, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -21,7 +21,7 @@ const AdminPanel = async () => {
 
     const handleDelete = async (slug) => {
       try {
-        const response = await fetch(`http://localhost:3000/api/product/${slug}`, {
+        const response = await fetch(`http://${process.env.VERCEL_URL}/api/product/${slug}`, {
           method: 'DELETE'
         });
   
