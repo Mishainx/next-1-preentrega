@@ -13,6 +13,7 @@ async function getItems(){
     if (response.ok) {
       return response.json();
     } else {
+      console.log(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`)
       console.log("Error en la respuesta:", response.status);
     }
   }
