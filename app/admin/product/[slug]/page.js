@@ -5,7 +5,7 @@ export default async function EditProduct({params}) {
 
   
     const {slug} = params
-    const response = await fetch(`http://localhost:3000/api/product/${slug}`,
+    const response = await fetch(`http://${process.env.VERCEL_URL}/api/product/${slug}`,
     {
         cache:"no-store"
     })
