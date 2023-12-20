@@ -1,64 +1,86 @@
-'use client'
+"use client";
+
 import Image from "next/image";
 import Counter from "../ui/Counter";
 import Button from "../ui/Button";
 import Link from "next/link";
-import { useState} from "react";
+import { useState } from "react";
 import { useCartContext } from "../context/CartContext";
 import { toast } from "react-toastify";
-
-export default function Item({product}) {
-    const {title,description,price,img,slug} = product     
-    const [quantity, setQuantity] = useState(1);
-    const {cart, isInCart,addToCart,updateCartQuantity} = useCartContext()
-
-    const toastNotify = () => toast('Producto agregado', { hideProgressBar: true, autoClose: 2000, type: 'success' })
+import { useAuthContext } from "../context/AuthContext";
+import Swal from 'sweetalert2'
 
 
-      const handleAdd = async()=>{
-        let newQuantity
-        const productFind = await isInCart(slug)
-        if(!productFind){
-          addToCart({product,quantity})
-        }
-        else{
-          newQuantity = productFind.quantity+quantity
-          updateCartQuantity(slug,newQuantity)
-        }
-        setQuantity(1)
+export default function Item({ product }) {
+  const { title, description, stock, price, img, slug } = product;
+  const [quantity, setQuantity] = useState(1);
+  const { cart, addToCart } = useCartContext();
+  const { user } = useAuthContext();
 
-        toastNotify()
-      }
+  const toastNotify = () =>
+    toast("Producto agregado", {
+      hideProgressBar: true,
+      autoClose: 2000,
+      type: "success",
+    });
 
-    return (
-      <div className="relative bg-white overflow-hidden rounded-lg shadow-md flex flex-col items-center w-40 m-4	">
+  const productInCart = cart?.items?.find((item) => item.slug === slug);
+  const totalInCart = productInCart ? productInCart.quantity : 0;
+
+  const handleAdd = async () => {
+    // Verificar si la cantidad seleccionada más la cantidad actual en el carrito supera el stock disponible
+    if (quantity + totalInCart > stock) {
+      toast.warning(`Stock insuficiente. Stock restante: ${stock - totalInCart}`, {
+        hideProgressBar: true,
+        autoClose: 5000,
+      });
+      return;
+    }
+
+    if(!user.logged){
+      Swal.fire({
+        title: "Registrate para comprar tu mate!",
+        showCancelButton: true,
+        confirmButtonText: '<a href="http://www.localhost:3000/users/register">Registrarme</a>',
+      })
+      return
+    }
+
+    addToCart(user.uid, { slug, quantity });
+    toastNotify();
+  };
+
+  return (
+    <div className="relative bg-white overflow-hidden rounded-lg shadow-md flex flex-col items-center w-40 m-4 ">
       <div className="before:absolute before:inset-0 before:h-8 before:bg-amber-400 before:content-['']"></div>
-        <Link href={`/product/${slug}`} className="z-10">
-          <Image
+      <Link href={`/product/${slug}`} className="z-10">
+        <Image
           alt={description}
           src={img}
           width={200}
           height={200}
           className="m-auto z-10 hover hover:scale-110 duration-300"
-          />
-        </Link>
+        />
+      </Link>
       <div className="p-6 -mt-7">
         <div className="text-center">
           <h3 className="font-bold">{title}</h3>
-          <p>{`$ ${price}`}</p>
-          <Link href={`/product/${slug}`}><p className="text-amber-400">Ver detalle</p></Link>
+          <p>{`$ ${price}`}</p> 
         </div>
       </div>
-      <Counter quantity={quantity} setQuantity={setQuantity}
-      
-      />
-      <Button
-      className="bg-amber-400 overflow-hidden w-full py-1 mt-4 hover:text-white"
-      onClick={()=>handleAdd()}
-      >
-        Agregar
-      </Button>      
+      {stock - totalInCart > 0 ? (
+        <Counter quantity={quantity} setQuantity={setQuantity} stock={stock} />
+      ) : (
+        <p className="text-red-500 -mt-5">Sin stock</p>
+      )}
+      {stock - totalInCart > 0 && (
+        <Button
+          className="bg-amber-400 overflow-hidden w-full py-1 mt-4 hover:text-white"
+          onClick={() => handleAdd()}
+        >
+          Agregar
+        </Button>
+      )}
     </div>
-    );
-
-};
+  );
+}

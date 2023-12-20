@@ -61,7 +61,7 @@ const AdminPanel = async () => {
         <div className="h-96 overflow-y-scroll max-w-full mx-auto p-8">
             <h2 className="text-3xl font-semibold mb-4">Gestión de Productos</h2>
             <Link href="/admin/products/create">
-                <button className="bg-green-500 text-white py-2 px-4 my-4 rounded mt-4">
+                <button className="bg-green-500 text-white py-2 px-4 my-4 rounded mt-4  hover:scale-105 duration-300">
                     Agregar Producto
                 </button>
             </Link>
@@ -101,7 +101,7 @@ const AdminPanel = async () => {
                                         alt="edit icon"
                                         src={editIcon}
                                         width={40}
-                                        className="bg-amber-400 rounded-full p-1 m-auto"
+                                        className="bg-amber-400  cursor-pointer rounded-full p-1 m-auto hover:scale-105 duration-200"
                                     />
                                 </Link>
                             </td>
@@ -111,7 +111,7 @@ const AdminPanel = async () => {
                                     src={deleteIcon}
                                     width={40}
                                     onClick={()=>handleDelete(product.slug,setProducts)}
-                                    className="bg-amber-400 rounded-full p-1 m-auto"
+                                    className="bg-amber-400  cursor-pointer rounded-full p-1 m-auto hover:scale-105 duration-200 text-black"
                                 />
                             </td>
                         </tr>

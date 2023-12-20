@@ -1,14 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import Button from "../ui/Button";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 const LoginForm = () => {
-  const { createUser, loginUser } = useAuthContext();
+  const router = useRouter()
+  const {user,loginUser } = useAuthContext();
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+
 
   const handleChange = (e) => {
     setValues({
@@ -19,8 +24,14 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Puedes agregar lógica de envío del formulario aquí si es necesario
+
   };
+
+  useEffect(() => {
+    if (user.logged) {
+      router.push('/');
+    }
+  }, [user.logged, router]);
 
   return (
     <div className="w-screen h-screen z-10 flex justify-center items-center">
@@ -50,16 +61,18 @@ const LoginForm = () => {
         <Button
           type="submit"
           onClick={() => loginUser(values)}
-          className="bg-white text-amber-400 py-2 px-4 rounded-md mr-4"
+          className="bg-white text-amber-400 py-2 px-4 rounded-md mr-4 hover:text-black"
         >
           Ingresar
         </Button>
+        <Link href={"/users/register"}>
         <Button
-          type="submit"
-          className="bg-white text-amber-400 py-2 px-4 rounded-md"
+          className="bg-white text-amber-400 py-2 px-4 rounded-md hover:text-black"
         >
-          Registrarme
+          Registrarse
         </Button>
+        
+        </Link>
       </form>
     </div>
   );

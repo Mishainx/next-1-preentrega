@@ -8,7 +8,7 @@ const Logo = () => {
     return (
 
         <Link href="/" className="">
-        <div className="flex flex-row justify-center items-center text-xs">
+        <div className="flex flex-row justify-center items-center text-xs hover:scale-105 duration-200">
         <Image
             alt="mate y venga logo"
             src={mate}

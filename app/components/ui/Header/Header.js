@@ -8,7 +8,6 @@ const Header = () => {
             <div className="container m-auto py-3 flex justify-between items-center">
             <Logo/>
             <Menu/>
-
             </div>
         </header>
     )

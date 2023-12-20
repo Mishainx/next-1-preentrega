@@ -27,7 +27,7 @@ const updateProduct = async (slug, values,file,img) => {
             stock: Number(values.stock),
             price: Number(values.price),
             category: values.category,
-            img: file?await handleImage(slug,file):null
+            img: file?await handleImage(slug,file):values.img
           }),
     });
 };

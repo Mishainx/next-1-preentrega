@@ -12,14 +12,14 @@ const RrSs = () => {
             src={whatsAppIcon}
             width={25}
             height={25}
-            className="bg-amber-600 w-9 cursor-pointer  p-2 rounded-full hover:bg-slate-100 transition-colors duration-300"
+            className=" w-9 cursor-pointer  p-2 rounded-full hover:invert"
             >
             </Image>
             <Image
             alt="instagram icon"
             src={instagramIcon}
             width={25}
-            className="bg-amber-600 w-9 cursor-pointer p-2 rounded-full hover:bg-slate-100 transition-colors duration-3"
+            className="w-9 cursor-pointer  p-2 rounded-full hover:invert"
             />
 
         </section>
