@@ -10,7 +10,7 @@ export const generateMetadata = async ({params}) => {
 
 export default async function ProductDetail({params}) {
     const {slug} = params
-    const response = await fetch(`http:/localhost:3000/api/product/${slug}`,
+    const response = await fetch(`https:/${process.env.VERCEL_URL}/api/product/${slug}`,
     {
         cache:"no-store"
     })

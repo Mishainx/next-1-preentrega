@@ -14,12 +14,12 @@ export const CartProvider = ({children}) =>{
 
     const getCart = async (id) => {
       try {
-        const response = await fetch(`http://${process.env.VERCEL_URL}/api/carts/${id}`,{cache: "no-cache"});
+        const response = await fetch(`https://${process.env.VERCEL_URL}/api/carts/${id}`,{cache: "no-cache"});
         const userCart = await response.json();
     
         if (userCart.items && userCart.items.length > 0) {
           const productPromises = userCart.items.map(async (cartItem) => {
-            const productResponse = await fetch(`http://${process.env.VERCEL_URL}/api/product/${cartItem.product}`);
+            const productResponse = await fetch(`https://${process.env.VERCEL_URL}/api/product/${cartItem.product}`);
             const productData = await productResponse.json();
             return {
               ...productData, 
@@ -42,7 +42,7 @@ export const CartProvider = ({children}) =>{
 
     const isInCart = async (productSlug) => {
       try {
-        const response = await fetch(`http://${process.env.VERCEL_URL}/api/carts/${user.uid}`);
+        const response = await fetch(`https://${process.env.VERCEL_URL}/api/carts/${user.uid}`);
         const userCart = await response.json();
 
   
@@ -60,7 +60,7 @@ export const CartProvider = ({children}) =>{
     
 
     const addToCart = async (id,item) =>{
-      const response = await fetch(`http://${process.env.VERCEL_URL}/api/carts/${id}/products`,{
+      const response = await fetch(`https://${process.env.VERCEL_URL}/api/carts/${id}/products`,{
         method:"POST",
         headers:{
           "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export const CartProvider = ({children}) =>{
 
     
     const removeFromCart = async(productSlug) => {
-      const response = await fetch(`http://${process.env.VERCEL_URL}/api/carts/${user.uid}/products`,{
+      const response = await fetch(`https://${process.env.VERCEL_URL}/api/carts/${user.uid}/products`,{
         method:"DELETE",
         headers:{
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export const CartProvider = ({children}) =>{
 
     const buyCart = async () => {
       try {
-        const response = await fetch(`http://${process.env.VERCEL_URL}/api/tickets/${user.uid}`, {
+        const response = await fetch(`https://${process.env.VERCEL_URL}/api/tickets/${user.uid}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ export const CartProvider = ({children}) =>{
     
         if (response.status === 200) {
           // Realizamos la solicitud DELETE para vaciar el carrito
-          const deleteResponse = await fetch(`http://${process.env.VERCEL_URL}/api/carts/${user.uid}`, {
+          const deleteResponse = await fetch(`https://${process.env.VERCEL_URL}/api/carts/${user.uid}`, {
             method: 'DELETE',
           });
     
@@ -118,13 +118,13 @@ export const CartProvider = ({children}) =>{
     };
 
     const getTicket= async(tid) =>{
-      const response = await fetch(` http://${process.env.VERCEL_URL}/api/tickets/${user.uid}/${tid}`)
+      const response = await fetch(` https://${process.env.VERCEL_URL}/api/tickets/${user.uid}/${tid}`)
       const ticketData = response.json()
       return ticketData
     }
     
     const getUserTicket= async() =>{
-      const response = await fetch(`http://${process.env.VERCEL_URL}/api/tickets/${user.uid}`)
+      const response = await fetch(`https://${process.env.VERCEL_URL}/api/tickets/${user.uid}`)
       const ticketsData = await response.json()
       return ticketsData
     }

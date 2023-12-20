@@ -8,7 +8,7 @@ export const metadata ={
 }
 
 export default async function Home() {
-  const response = await fetch(`http:/localhost:3000/api/products`,{cache:"no-cache"})
+  const response = await fetch(`https:/${process.env.VERCEL_URL}/api/products`,{cache:"no-cache"})
   const items = await response.json()
     
   return (

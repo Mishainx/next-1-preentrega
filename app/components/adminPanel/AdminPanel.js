@@ -21,7 +21,7 @@ const AdminPanel = async () => {
 
     const handleDelete = async (slug) => {
       try {
-        const response = await fetch(`http://${process.env.VERCEL_URL}/api/product/${slug}`, {
+        const response = await fetch(`https://${process.env.VERCEL_URL}/api/product/${slug}`, {
           method: 'DELETE'
         });
   
@@ -42,7 +42,7 @@ const AdminPanel = async () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:3000/api/products`, { revalidate: 0 });
+          const response = await fetch(`https://${process.env.VERCEL_URL}/api/products`, { revalidate: 0 });
           if (response.ok) {
             const productsData = await response.json();
             setProducts(productsData);

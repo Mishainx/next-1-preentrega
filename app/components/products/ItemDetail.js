@@ -2,8 +2,7 @@
 
 // ItemDetail.js
 import Image from "next/image";
-import Counter from "../ui/Counter";
-import Button from "../ui/Button";
+
 import backIcon from "@/public/assets/icons/back-icon.svg";
 import Link from "next/link";
 import { useCartContext } from "../context/CartContext";
