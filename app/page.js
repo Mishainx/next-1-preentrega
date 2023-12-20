@@ -7,15 +7,17 @@ export const metadata ={
   keywords: ["mate","yerba","bombilla","tradición argentina"],
 }
 
-export default async function Home() {
+async function getItems(){
   const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`,{cache:"no-cache"})
   if (response.ok) {
-    const items = await response.json();
+    return response.json();
   } else {
     console.log("Error en la respuesta:", response.status);
   }
-  const items = await response.json()
-  console.log(items, "consoleado")  
+}
+
+export default async function Home() {
+  const items = getItems()
 
   return (
     <main className="min-h-screen	flex flex-col justify-center items-center">
