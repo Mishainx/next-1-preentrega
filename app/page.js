@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from 'react';
 import ItemList from "./components/products/ItemList";
 import CategoriesShow from "./components/categories-show/CategoriesShow";
@@ -20,7 +22,6 @@ export default function Home() {
         setItems(fetchedItems);
       } else {
         console.error("Error en la respuesta:", response.status);
-        // Manejar el error aquí
       }
     }
 
