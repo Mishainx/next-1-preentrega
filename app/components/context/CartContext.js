@@ -118,7 +118,7 @@ export const CartProvider = ({children}) =>{
     };
 
     const getTicket= async(tid) =>{
-      const response = await fetch(` https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tickets/${user.uid}/${tid}`)
+      const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tickets/${user.uid}/${tid}`)
       const ticketData = response.json()
       return ticketData
     }

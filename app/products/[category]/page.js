@@ -20,7 +20,7 @@ export async function generateStaticParams (){
 
 export default async function ItemList({params}) {
     const {category} = params
-    const response = await fetch(`http://localhost:3000/api/products/${category}`,{cache:"no-store"})
+    const response = await fetch(`http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${category}`,{cache:"no-store"})
     const products = await response.json();
     const items = products;
 
