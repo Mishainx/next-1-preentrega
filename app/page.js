@@ -17,7 +17,7 @@ async function getItems(){
 }
 
 export default async function Home() {
-  const items = getItems()
+  const items = await getItems()
 
   return (
     <main className="min-h-screen	flex flex-col justify-center items-center">
