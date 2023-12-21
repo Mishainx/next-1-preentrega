@@ -50,6 +50,7 @@ export const AuthProvider = ({children}) => {
 const loginUser = async (values) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
+        console.log(userCredential)
         return userCredential.user; 
     } catch (error) {
         console.error("Error al iniciar sesión: ", error);
@@ -77,8 +78,9 @@ const loginUser = async (values) => {
 
     useEffect(() => {
         onAuthStateChanged(auth, async(user) => {
-
+            console.log(user)
             if (user) {
+                console.log("entro")
                 setUser({
                     logged: true,
                     email: user.email,
@@ -86,6 +88,7 @@ const loginUser = async (values) => {
                     role: user.uid?await userRole(user.uid):null
                 })
             } else {
+                console.log("entro")
                 setUser({
                     logged: false,
                     email: null,

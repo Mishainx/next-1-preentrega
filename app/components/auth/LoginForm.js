@@ -23,8 +23,6 @@ const LoginForm = () => {
     try {
       e.preventDefault();
        await loginUser(values);
-       console.log(await user)
-       console.log(user)
 
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
