@@ -58,15 +58,15 @@ const AdminPanel = async () => {
     }, []);
 
     return (
-        <div className="h-96 overflow-y-scroll max-w-full mx-auto p-8">
-            <h2 className="text-3xl font-semibold mb-4">Gestión de Productos</h2>
-            <Link href="/admin/products/create">
-                <button className="bg-green-500 text-white py-2 px-4 my-4 rounded mt-4  hover:scale-105 duration-300">
-                    Agregar Producto
-                </button>
-            </Link>
-            <table className="min-w-full bg-white border border-gray-300">
-                <thead>
+      <div className="p-4 mx-auto max-w-full overflow-x-auto">
+          <h2 className="text-xl md:text-3xl font-semibold mb-4">Gestión de Productos</h2>
+          <Link href="/admin/products/create">
+              <a className="inline-block bg-green-500 text-white py-2 px-4 my-4 rounded hover:bg-green-600">
+                  Agregar Producto
+              </a>
+          </Link>
+          <table className="min-w-full bg-white border border-gray-300 text-sm md:text-base">
+              <thead>
                     <tr>
                         <th className="border border-gray-300 p-2">Imagen</th>
                         <th className="border border-gray-300 p-2">Título del Producto</th>
