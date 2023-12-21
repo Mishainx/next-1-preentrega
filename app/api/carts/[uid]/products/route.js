@@ -10,6 +10,10 @@ export const POST = async (request, { params }) => {
     const cartRef = doc(db, 'carts', uid);
     const productRef = doc(db, 'products', product);
 
+    if (1==1) {
+      return NextResponse.json({ message: product,quantity }, { status: 404 });
+    }
+
     const [cartSnapshot, productSnapshot] = await Promise.all([
       getDoc(cartRef),
       getDoc(productRef),
@@ -31,7 +35,7 @@ export const POST = async (request, { params }) => {
       return NextResponse.json({ message: 'Stock insuficiente' }, { status: 400 });
     }
 
-    let updatedCart; // Mover la declaración de updatedCart aquí
+    let updatedCart; 
 
     const existingProductIndex = cartData.items.findIndex((item) => item.product === product);
 
