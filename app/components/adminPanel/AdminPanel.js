@@ -46,6 +46,7 @@ const AdminPanel = async () => {
           if (response.ok) {
             const productsData = await response.json();
             setProducts(productsData);
+            console.log(productsData)
           } else {
             throw new Error(`Error al obtener productos: ${response.status}`);
           }
