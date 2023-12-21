@@ -44,6 +44,8 @@ export const POST = async (request, { params }) => {
         );
       }
 
+      console.log("hasta acá")
+
       updatedCart = {
         ...cartData,
         items: cartData.items.map((item, index) => {
@@ -78,7 +80,6 @@ export const POST = async (request, { params }) => {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error al agregar elemento al carrito:', error);
     return NextResponse.json({ message: 'Error interno del servidor', error }, { status: 500 });
   }
 };
