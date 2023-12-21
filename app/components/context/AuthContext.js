@@ -50,7 +50,6 @@ export const AuthProvider = ({children}) => {
 const loginUser = async (values) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
-        console.log(userCredential)
         return userCredential.user; 
     } catch (error) {
         console.error("Error al iniciar sesión: ", error);
@@ -77,27 +76,29 @@ const loginUser = async (values) => {
     };
 
     useEffect(() => {
-        onAuthStateChanged(auth, async(user) => {
-            console.log(user)
+        console.log("Entrando en useEffect");
+        onAuthStateChanged(auth, async (user) => {
+            console.log("Cambio en el estado de autenticación");
             if (user) {
-                console.log("entro")
+                console.log("Usuario autenticado");
                 setUser({
                     logged: true,
                     email: user.email,
                     uid: user.uid,
-                    role: user.uid?await userRole(user.uid):null
-                })
+                    role: user.uid ? await userRole(user.uid) : null
+                });
             } else {
-                console.log("entro")
+                console.log("Usuario no autenticado");
                 setUser({
                     logged: false,
                     email: null,
                     uid: null,
-                    role:null
-                })
+                    role: null
+                });
             }
-        })
-    }, [])
+        });
+    }, []);
+    
 
     return (
         <AuthContext.Provider value={{
