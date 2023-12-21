@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import Button from "../ui/Button";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { toast } from "react-toastify";
+import { useRouter } from "next/navi";  // Asegúrate de que la importación sea correcta
 
 const LoginForm = () => {
   const router = useRouter();
@@ -25,17 +24,18 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await loginUser(values);
+      // Si el inicio de sesión es exitoso, el useEffect más abajo manejará la redirección
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
-      toast.error('Error en el inicio de sesión');
+      // Aquí puedes añadir una lógica para mostrar un mensaje de error al usuario
     }
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined" && user.logged) {
-      router.push('/');
+    if (user?.logged) {
+      router.push('/');  // Redirige al usuario a la página de inicio una vez que ha iniciado sesión
     }
-  }, [user.logged, router]);
+  }, [user?.logged, router]);
 
   return (
     <div className="w-screen h-screen z-10 flex justify-center items-center">
@@ -62,12 +62,12 @@ const LoginForm = () => {
           name="password"
           onChange={handleChange}
         />
-        <Button
+        <button
           type="submit"
           className="bg-white text-amber-400 py-2 px-4 rounded-md mr-4 hover:text-black"
         >
           Ingresar
-        </Button>
+        </button>
         <Link href="/users/register">
           <a className="bg-white text-amber-400 py-2 px-4 rounded-md hover:text-black">
             Registrarse
