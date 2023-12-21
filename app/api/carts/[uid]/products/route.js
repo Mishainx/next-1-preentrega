@@ -74,11 +74,14 @@ export const POST = async (request, { params }) => {
       };
     }
 
-    if (1==1) {
-      return NextResponse.json({ message: "hasta acá" }, { status: 404 });
-    }
 
-    await setDoc(cartRef, updatedCart);
+try {
+  console.log("Actualizando carrito en Firestore:", updatedCart);
+  await setDoc(cartRef, updatedCart);
+} catch (error) {
+  console.error("Error al actualizar el carrito en Firestore:", error);
+  return NextResponse.json({ message: 'Error al actualizar el carrito', error }, { status: 500 });
+}
 
     return NextResponse.json(
       { message: 'Elemento agregado al carrito', updatedCart: updatedCart },
