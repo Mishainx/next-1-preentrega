@@ -25,11 +25,10 @@ export default async function ItemList({params}) {
     
 async function getItems(category){
   try{
-    const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${category}`,{cache:"no-store"})
+    const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${category}`,{cache:"no-cache"})
     if (response.ok) {
       return response.json();
     } else {
-      console.log(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`)
       console.log("Error en la respuesta:", response.status);
     }
   }
