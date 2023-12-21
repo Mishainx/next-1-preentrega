@@ -25,6 +25,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await loginUser(values)
+    alert("hola")
   };
 
   useEffect(() => {
