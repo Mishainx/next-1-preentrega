@@ -70,7 +70,6 @@ export const CartProvider = ({children}) =>{
           quantity:item.quantity
         })
       })
-      console.log(await response.json())
       getCart(user.uid)
 }
 
