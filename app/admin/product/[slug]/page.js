@@ -20,15 +20,10 @@ async function fetchProduct(slug) {
 }
 
 export default async function EditProduct({params}) {
-  try{
 
     const {slug} = params
     const item = await fetchProduct(slug)
 
-  }
-  catch(error){
-    throw error
-  }
 
   return (
     <section>
