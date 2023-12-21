@@ -43,7 +43,7 @@ const MenuList = ({ open, setOpen, handleClose }) => {
                     ))}
                     {user.logged && (
                         <Button
-                            className="mt-4 py-2 px-4 text-white"
+                            className="py-2 px-4 text-white"
                             onClick={() => {
                                 logout();
                                 handleClose();
