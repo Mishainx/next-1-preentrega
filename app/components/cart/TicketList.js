@@ -19,8 +19,8 @@ const TicketList = () => {
   }, [getUserTicket]);
 
   return (
-    <div className="w-full">
-      <table className="w-full bg-white border border-gray-300 text-center">
+    <div className="w-full overflow-x-auto">
+      <table className="min-w-full bg-white border border-gray-300 text-center">
         <thead>
           <tr className="bg-amber-400">
             <th className="p-2">Ticket ID</th>
@@ -35,7 +35,7 @@ const TicketList = () => {
               <td className="p-2">{ticket.id}</td>
               <td className="p-2">{ticket.date}</td>
               <td className="p-2">
-                <ul className=" pl-4">
+                <ul className="pl-4">
                   {ticket.items.map((item, index) => (
                     <li key={index}>
                       {item.quantity} x {item.slug} - ${item.subtotal}
