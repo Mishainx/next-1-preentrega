@@ -22,11 +22,8 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const tutu = await loginUser(values);
-      console.log(await tutu)
-      alert(values.email)
-      alert(user.email)
-      
+       await loginUser(values);
+
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
     }
