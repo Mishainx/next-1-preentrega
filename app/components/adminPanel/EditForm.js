@@ -35,7 +35,7 @@ const EditForm = ({ item }) => {
     
 const updateProduct = async (slug, values,file,img) => {
 
-    const updateFetch = await fetch(`http://${process.env.VERCEL_URL}/api/product/${slug}`, { 
+    const updateFetch = await fetch(`http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/product/${slug}`, { 
         method:"PUT",
         headers:{
             "Content-Type": "application/json",
