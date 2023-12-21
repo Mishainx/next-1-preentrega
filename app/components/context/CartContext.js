@@ -59,15 +59,15 @@ export const CartProvider = ({children}) =>{
     };
     
 
-    const addToCart = async (id,item) =>{
-      const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/carts/${id}/products`,{
+    const addToCart = async (uid,slug,quantity) =>{
+      const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/carts/${uid}/products`,{
         method:"POST",
         headers:{
           "Content-Type": "application/json",
         },
         body:JSON.stringify({
-          product:item.slug,
-          quantity:item.quantity
+          product:slug,
+          quantity:quantity
         })
       })
       const data = await response.json();
