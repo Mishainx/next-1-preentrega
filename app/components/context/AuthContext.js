@@ -96,6 +96,7 @@ const loginUser = async (values) => {
                 console.log("no entro")
             }
         })
+        console.log (user)
     }, [])
 
     return (
