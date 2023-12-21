@@ -78,7 +78,6 @@ const loginUser = async (values) => {
     useEffect(() => {
         onAuthStateChanged(auth, async(user) => {
             if (user) {
-                console.log("Usuario autenticado:", user);
                 setUser({
                     logged: true,
                     email: user.email,
@@ -86,7 +85,6 @@ const loginUser = async (values) => {
                     role: user.email == "admin@mateyvenga.com"? "admin": "usuario"
                 })
             } else {
-                console.log("Usuario no autenticado");
                 setUser({
                     logged: false,
                     email: null,

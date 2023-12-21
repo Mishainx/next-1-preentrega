@@ -29,7 +29,6 @@ export default function Item({ product }) {
   const totalInCart = productInCart ? productInCart.quantity : 0;
 
   const handleAdd = async () => {
-    // Verificar si la cantidad seleccionada más la cantidad actual en el carrito supera el stock disponible
     if (quantity + totalInCart > stock) {
       toast.warning(`Stock insuficiente. Stock restante: ${stock - totalInCart}`, {
         hideProgressBar: true,
@@ -52,6 +51,9 @@ export default function Item({ product }) {
     }
 
     addToCart(user.uid, { slug, quantity });
+
+    console.log(user.uid,slug,quantity)
+
     toastNotify();
   };
 
