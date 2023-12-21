@@ -64,6 +64,7 @@ const LoginForm = () => {
         <button
           type="submit"
           className="bg-white text-amber-400 py-2 px-4 rounded-md mr-4 hover:text-black"
+          onClick={()=>alert("hola")}
         >
           Ingresar
         </button>
