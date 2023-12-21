@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import Link from "next/link";
-import { useRouter } from "next/navigation";  // Asegúrate de que la importación sea correcta
+import { useRouter } from "next/navigation";  
 
 const LoginForm = () => {
   const router = useRouter();
@@ -21,13 +21,12 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(values.email)
     try {
       await loginUser(values);
+      
       // Si el inicio de sesión es exitoso, el useEffect más abajo manejará la redirección
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
-      // Aquí puedes añadir una lógica para mostrar un mensaje de error al usuario
     }
   };
 

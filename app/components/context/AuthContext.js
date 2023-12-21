@@ -50,6 +50,7 @@ export const AuthProvider = ({children}) => {
 
     const loginUser = async (values) => {
         await signInWithEmailAndPassword(auth, values.email, values.password)
+        alert("hola")
     }
 
     const logout = () => {
