@@ -42,7 +42,7 @@ const AdminPanel = async () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(`https://${process.env.VERCEL_URL}/api/products`, { revalidate: 0 });
+          const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products`, { revalidate: 0 });
           if (response.ok) {
             const productsData = await response.json();
             setProducts(productsData);
