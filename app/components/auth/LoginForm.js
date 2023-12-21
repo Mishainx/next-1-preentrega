@@ -20,8 +20,8 @@ const LoginForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     try {
+      e.preventDefault();
       await loginUser(values);
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
