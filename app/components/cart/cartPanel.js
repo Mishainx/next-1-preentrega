@@ -41,4 +41,6 @@ const CartPanel = async() => {
     </section>
   );
 
+};
+
 export default CartPanel;
