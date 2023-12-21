@@ -52,8 +52,6 @@ export default function Item({ product }) {
 
     addToCart(user.uid, { slug, quantity });
 
-    console.log(user.uid,slug,quantity)
-
     toastNotify();
   };
 
