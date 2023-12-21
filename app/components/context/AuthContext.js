@@ -77,8 +77,7 @@ const loginUser = async (values) => {
 
     useEffect(() => {
         onAuthStateChanged(auth, async(user) => {
-            console.log("alala")
-            console.log(user)    
+
             if (user) {
                 setUser({
                     logged: true,
@@ -86,6 +85,7 @@ const loginUser = async (values) => {
                     uid: user.uid,
                     role: user.uid?await userRole(user.uid):null
                 })
+                console.log(user)
             } else {
                 setUser({
                     logged: false,
@@ -93,6 +93,7 @@ const loginUser = async (values) => {
                     uid: null,
                     role:null
                 })
+                console.log("no entro")
             }
         })
     }, [])
