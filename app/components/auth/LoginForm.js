@@ -21,6 +21,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    alert(values.email)
     try {
       await loginUser(values);
       // Si el inicio de sesión es exitoso, el useEffect más abajo manejará la redirección
@@ -64,7 +65,7 @@ const LoginForm = () => {
         <button
           type="submit"
           className="bg-white text-amber-400 py-2 px-4 rounded-md mr-4 hover:text-black"
-          onClick={()=>alert("hola")}
+          onClick={()=>handleSubmit()}
         >
           Ingresar
         </button>
