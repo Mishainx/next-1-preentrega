@@ -22,7 +22,9 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await loginUser(values);
+      const tutu = await loginUser(values);
+      alert(tutu)
+      
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
     }
