@@ -36,9 +36,6 @@ export const POST = async (request, { params }) => {
 
     const existingProductIndex = cartData.items.findIndex((item) => item.product === product);
 
-    if (1==1) {
-      return NextResponse.json({ message: updatedCart,existingProductIndex }, { status: 404 });
-    }
 
     if (existingProductIndex !== -1) {
       // Verificar el stock disponible para el producto específico
@@ -48,8 +45,6 @@ export const POST = async (request, { params }) => {
           { status: 400 }
         );
       }
-
-      console.log("hasta acá")
 
       updatedCart = {
         ...cartData,
@@ -70,6 +65,10 @@ export const POST = async (request, { params }) => {
           { message: `La cantidad total de ${productData.name} en el carrito supera el stock disponible` },
           { status: 400 }
         );
+      }
+
+      if (1==1) {
+        return NextResponse.json({ message: updatedCart,existingProductIndex }, { status: 404 });
       }
 
       updatedCart = {
