@@ -23,7 +23,8 @@ const LoginForm = () => {
     try {
       e.preventDefault();
       const tutu = await loginUser(values);
-      alert(tutu)
+      alert(await tutu)
+      alert(values.email)
       
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
