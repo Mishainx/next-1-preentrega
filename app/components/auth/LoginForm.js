@@ -40,19 +40,19 @@ const LoginForm = () => {
     }
   }, [user, router]);
 
-   return (
-      <div className="flex justify-center items-center w-screen h-screen z-10">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-amber-400 py-4 px-6 rounded-xl w-full max-w-md"
-        >
-          <h2 className="text-2xl font-bold text-center text-white mb-4">Login</h2>
+  return (
+    <div className="flex justify-center items-center w-screen h-screen z-10">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-amber-400 py-4 px-6 rounded-xl w-full max-w-md"
+      >
+        <h2 className="text-2xl font-bold text-center text-white mb-4">Login</h2>
         <input
           type="email"
           value={values.email}
           required
           placeholder="Tu email"
-          className="p-2 rounded w-full border border-white block my-4"
+          className="p-2 rounded w-full border border-white block my-2"
           name="email"
           onChange={handleChange}
         />
@@ -61,21 +61,23 @@ const LoginForm = () => {
           value={values.password}
           required
           placeholder="Tu password"
-          className="p-2 rounded w-full border border-white block my-4"
+          className="p-2 rounded w-full border border-white block my-2"
           name="password"
           onChange={handleChange}
         />
-        <button
-          type="submit"
-          className="bg-white text-amber-400 py-2 px-4 rounded-md mr-4 hover:text-black"
-        >
-          Ingresar
-        </button>
-        <Link href="/users/register">
-          <a className="bg-white text-amber-400 py-2 px-4 rounded-md hover:text-black">
-            Registrarse
-          </a>
-        </Link>
+        <div className="flex flex-col sm:flex-row justify-between sm:justify-start gap-2">
+          <button
+            type="submit"
+            className="bg-white text-amber-400 py-2 px-4 rounded-md hover:text-black w-full sm:w-auto"
+          >
+            Ingresar
+          </button>
+          <Link href="/users/register">
+            <a className="bg-white text-amber-400 py-2 px-4 rounded-md hover:text-black w-full sm:w-auto">
+              Registrarse
+            </a>
+          </Link>
+        </div>
       </form>
     </div>
   );
