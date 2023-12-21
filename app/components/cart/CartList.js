@@ -71,14 +71,14 @@ const CartView = ({ cart, getTicket,removeFromCart,buyCart }) => {
 
 
   return (
-      <div className="w-full">
-      <h2 className="w-full bg-amber-400 font-bold text-white text-center text-xs">
+    <div className="w-full overflow-x-auto">
+      <h2 className="bg-amber-400 font-bold text-white text-center text-xs md:text-sm">
         Carrito de Compras
       </h2>
-      <table className="w-full bg-white border border-gray-300 overflow-y-scroll text-center text-xs">
+      <table className="min-w-full bg-white border border-gray-300 text-center text-xs md:text-sm">
         <thead>
           <tr>
-            <th className="border border-gray-300 p-2">Miniatura</th>
+            <th className="border border-gray-300 p-2 hidden md:table-cell">Miniatura</th>
             <th className="border border-gray-300 p-2">Slug</th>
             <th className="border border-gray-300 p-2">Precio</th>
             <th className="border border-gray-300 p-2">Cantidad</th>
