@@ -20,14 +20,15 @@ export async function generateStaticParams (){
 
 export default async function ItemList({params}) {
     const {category} = params
-    console.log(category)
 
     
 async function getItems(category){
+  let items;
+
   try{
     const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${category}`,{cache:"no-cache"})
     if (response.ok) {
-      return response.json();
+      return items = await response.json()
     } else {
       console.log("Error en la respuesta:", response.status);
     }
@@ -36,9 +37,6 @@ async function getItems(category){
     throw new Error("failed to fetch")
   }
 }
-
-    const items = getItems(category)
-
     return (
         <div className="h-full min-h-screen flex flex-row text-xs flex-wrap justify-center items-center">
                 {
