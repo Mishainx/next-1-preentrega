@@ -79,7 +79,7 @@ export const POST = async (request, { params }) => {
     );
   } catch (error) {
     console.error('Error al agregar elemento al carrito:', error);
-    return NextResponse.json({ message: 'Error interno del servidor' }, { status: 500 });
+    return NextResponse.json({ message: 'Error interno del servidor', error }, { status: 500 });
   }
 };
 
