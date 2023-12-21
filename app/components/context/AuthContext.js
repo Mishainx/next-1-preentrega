@@ -83,7 +83,7 @@ const loginUser = async (values) => {
                     logged: true,
                     email: user.email,
                     uid: user.uid,
-                    role: "usuario"//user.uid ? await userRole(user.uid) : null
+                    role: user ? await userRole(user.uid) : null
                 })
             } else {
                 console.log("Usuario no autenticado");
