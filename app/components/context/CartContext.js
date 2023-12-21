@@ -61,7 +61,7 @@ export const CartProvider = ({children}) =>{
 
     const addToCart = async (uid,slug,quantity) =>{
       console.log(uid,slug,quantity)
-      const response = await fetch(`http://next-1-preentrega-tau.vercel.app/api/carts/zxqjTGUMqZQ3zeYKKYMh5GL9eL93/products`,{
+      const response = await fetch(`http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/carts/${uid}/products`,{
         method:"POST",
         headers:{
           "Content-Type": "application/json",

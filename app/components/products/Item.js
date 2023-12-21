@@ -18,6 +18,20 @@ export default function Item({ product }) {
   const { cart, addToCart } = useCartContext();
   const { user } = useAuthContext();
 
+  const addToCarto = async (uid,slug,quantity) =>{
+    const response = await fetch(`http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/carts/${uid}/products`,{
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify({
+        product:slug,
+        quantity:quantity
+      })
+    })
+
+}
+
   const toastNotify = () =>
     toast("Producto agregado", {
       hideProgressBar: true,
@@ -50,7 +64,7 @@ export default function Item({ product }) {
       return
     }
 
-    await addToCart(user.uid, slug, quantity );
+    await addToCarto(user.uid, slug, quantity );
 
     toastNotify();
   };
