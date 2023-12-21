@@ -67,14 +67,15 @@ export const POST = async (request, { params }) => {
         );
       }
 
-      if (1==1) {
-        return NextResponse.json({ message: updatedCart,existingProductIndex }, { status: 404 });
-      }
 
       updatedCart = {
         ...cartData,
         items: [...cartData.items, { product, quantity }],
       };
+    }
+
+    if (1==1) {
+      return NextResponse.json({ message: "hasta acá" }, { status: 404 });
     }
 
     await setDoc(cartRef, updatedCart);
