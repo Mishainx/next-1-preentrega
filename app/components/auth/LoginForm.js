@@ -31,7 +31,12 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (user.logged) {
-      router.push('/'); 
+      if(user.role=="admin"){
+        router.push('/admin'); 
+      }
+      else{
+        router.push('/'); 
+      }
     }
   }, [user, router]);
 
