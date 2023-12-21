@@ -72,7 +72,6 @@ const loginUser = async (values) => {
         const findUser = await fetch( `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/users/${uid} `)   
         const userData = await findUser.json()
         const userRole = userData.role
-        console.log(userRole)
         return userRole
     };
 
@@ -84,7 +83,7 @@ const loginUser = async (values) => {
                     logged: true,
                     email: user.email,
                     uid: user.uid,
-                    role: user ? await userRole(user.uid) : null
+                    role: user.email == "admin@mateyvenga.com"? "admin": "usuario"
                 })
             } else {
                 console.log("Usuario no autenticado");
