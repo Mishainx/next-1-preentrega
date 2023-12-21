@@ -20,6 +20,7 @@ export async function generateStaticParams (){
 
 export default async function ItemList({params}) {
     const {category} = params
+    console.log(category)
 
     
 async function getItems(category){
