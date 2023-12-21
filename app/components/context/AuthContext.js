@@ -95,7 +95,7 @@ const loginUser = async (values) => {
                 })
             }
         })
-    }, [])
+    }, [user])
 
     return (
         <AuthContext.Provider value={{
