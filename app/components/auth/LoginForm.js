@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import Button from "../ui/Button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";  // Asegúrate de que la importación sea correcta
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -24,18 +25,17 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await loginUser(values);
-      // Si el inicio de sesión es exitoso, el useEffect más abajo manejará la redirección
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
-      // Aquí puedes añadir una lógica para mostrar un mensaje de error al usuario
+      toast.error('Error en el inicio de sesión');
     }
   };
 
   useEffect(() => {
-    if (user?.logged) {
-      router.push('/');  // Redirige al usuario a la página de inicio una vez que ha iniciado sesión
+    if (user.logged) {
+      router.push('/'); // Redirige al usuario a la página de inicio después de iniciar sesión
     }
-  }, [user?.logged, router]);
+  }, [user.logged, router]);
 
   return (
     <div className="w-screen h-screen z-10 flex justify-center items-center">
