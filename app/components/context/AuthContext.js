@@ -50,7 +50,6 @@ export const AuthProvider = ({children}) => {
 const loginUser = async (values) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
-        console.log(userCredential)
         return userCredential.user; 
     } catch (error) {
         console.error("Error al iniciar sesión: ", error);
@@ -85,6 +84,8 @@ const loginUser = async (values) => {
                     uid: user.uid,
                     role: user.uid?await userRole(user.uid):null
                 })
+            console.log("alala")
+            console.log(user)    
             } else {
                 setUser({
                     logged: false,
