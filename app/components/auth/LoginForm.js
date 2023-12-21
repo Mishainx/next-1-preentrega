@@ -40,13 +40,13 @@ const LoginForm = () => {
     }
   }, [user, router]);
 
-  return (
-    <div className="w-screen h-screen z-10 flex justify-center items-center">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-amber-400 py-4 px-6 rounded-xl max-w-md w-full"
-      >
-        <h2 className="text-white mb-4 text-center text-2xl font-bold">Login</h2>
+   return (
+      <div className="flex justify-center items-center w-screen h-screen z-10">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-amber-400 py-4 px-6 rounded-xl w-full max-w-md"
+        >
+          <h2 className="text-2xl font-bold text-center text-white mb-4">Login</h2>
         <input
           type="email"
           value={values.email}

@@ -44,7 +44,7 @@ const MenuList = ({ open, setOpen, handleClose }) => {
                   ))}
                   {user.logged && (
                       <Button
-                          className="mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white"
+                          className="mt-4 py-2 px-4 bg-blue-500 text-white"
                           onClick={() => {
                               logout();
                               handleClose();
