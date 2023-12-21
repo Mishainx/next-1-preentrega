@@ -38,26 +38,30 @@ export const POST = async (request, { params }) => {
 
 
     if (existingProductIndex !== -1) {
+      // Calcular la nueva cantidad
+      const newQuantity = cartData.items[existingProductIndex].quantity + quantity;
+    
       // Verificar el stock disponible para el producto específico
-      if (productData.stock < updatedCart.items[existingProductIndex].quantity + quantity) {
+      if (productData.stock < newQuantity) {
         return NextResponse.json(
           { message: `La cantidad total de ${productData.name} en el carrito supera el stock disponible` },
           { status: 400 }
         );
       }
 
-      updatedCart = {
-        ...cartData,
-        items: cartData.items.map((item, index) => {
-          if (index === existingProductIndex) {
-            return {
-              ...item,
-              quantity: item.quantity + quantity,
-            };
-          }
-          return item;
-        }),
-      };
+  // Actualizar la cantidad del producto existente
+  updatedCart = {
+    ...cartData,
+    items: cartData.items.map((item, index) => {
+      if (index === existingProductIndex) {
+        return {
+          ...item,
+          quantity: newQuantity,
+        };
+      }
+      return item;
+    }),
+  };
     } else {
       // Verificar el stock disponible para el nuevo producto
       if (productData.stock < quantity) {
