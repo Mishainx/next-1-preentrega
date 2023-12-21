@@ -47,14 +47,16 @@ export const AuthProvider = ({children}) => {
                 toastNotifyError();
 }
 }
-
 const loginUser = async (values) => {
     try {
-        await signInWithEmailAndPassword(auth, values.email, values.password);
+        const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
+        return userCredential.user; 
     } catch (error) {
         console.error("Error al iniciar sesión: ", error);
+        return null;
     }
 };
+
 
     const logout = () => {
         signOut(auth)
