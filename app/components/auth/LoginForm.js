@@ -1,9 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
-import Button from "../ui/Button";
 import Link from "next/link";
-import { useRouter } from "next/navi";  // Asegúrate de que la importación sea correcta
+import { useRouter } from "next/navigation";  // Asegúrate de que la importación sea correcta
 
 const LoginForm = () => {
   const router = useRouter();
