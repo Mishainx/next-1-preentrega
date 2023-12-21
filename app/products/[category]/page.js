@@ -1,5 +1,4 @@
 import Item from "@/app/components/products/Item"
-import { Suspense } from "react"
 
 export const generateMetadata = async ({params}) => {
     return {
@@ -18,7 +17,7 @@ export async function generateStaticParams (){
     ]
 }
 
-async function getItems(){
+async function getItems(category){
     try{
       const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${category}`,{cache:"no-store"})
       if (response.ok) {
