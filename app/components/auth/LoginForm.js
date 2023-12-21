@@ -44,7 +44,7 @@ const LoginForm = () => {
     <div className="flex justify-center items-center w-screen h-screen z-10">
       <form
         onSubmit={handleSubmit}
-        className="bg-amber-400 py-4 px-6 rounded-xl w-full max-w-md"
+        className="bg-amber-400 py-4 px-4 sm:px-6 rounded-xl w-full max-w-md mx-2 sm:mx-0"
       >
         <h2 className="text-2xl font-bold text-center text-white mb-4">Login</h2>
         <input
