@@ -76,24 +76,27 @@ const loginUser = async (values) => {
     };
 
     useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
+        onAuthStateChanged(auth, async(user) => {
             if (user) {
+                console.log("Usuario autenticado:", user);
                 setUser({
                     logged: true,
                     email: user.email,
                     uid: user.uid,
                     role: user.uid ? await userRole(user.uid) : null
-                });
+                })
             } else {
+                console.log("Usuario no autenticado");
                 setUser({
                     logged: false,
                     email: null,
                     uid: null,
                     role: null
-                });
+                })
             }
-        });
-    }, []);
+        })
+    }, [])
+    
     
 
     return (
