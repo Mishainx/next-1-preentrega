@@ -23,8 +23,6 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await loginUser(values);
-      
-      // Si el inicio de sesión es exitoso, el useEffect más abajo manejará la redirección
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
     }

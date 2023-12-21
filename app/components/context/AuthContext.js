@@ -48,10 +48,13 @@ export const AuthProvider = ({children}) => {
 }
 }
 
-    const loginUser = async (values) => {
-        await signInWithEmailAndPassword(auth, values.email, values.password)
-        alert("hola")
+const loginUser = async (values) => {
+    try {
+        await signInWithEmailAndPassword(auth, values.email, values.password);
+    } catch (error) {
+        console.error("Error al iniciar sesión: ", error);
     }
+};
 
     const logout = () => {
         signOut(auth)
