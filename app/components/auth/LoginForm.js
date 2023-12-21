@@ -32,8 +32,8 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
-    if (user.logged) {
-      router.push('/'); // Redirige al usuario a la página de inicio después de iniciar sesión
+    if (typeof window !== "undefined" && user.logged) {
+      router.push('/');
     }
   }, [user.logged, router]);
 
