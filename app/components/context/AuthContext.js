@@ -76,11 +76,8 @@ const loginUser = async (values) => {
     };
 
     useEffect(() => {
-        console.log("Entrando en useEffect");
         onAuthStateChanged(auth, async (user) => {
-            console.log("Cambio en el estado de autenticación");
             if (user) {
-                console.log("Usuario autenticado");
                 setUser({
                     logged: true,
                     email: user.email,
@@ -88,7 +85,6 @@ const loginUser = async (values) => {
                     role: user.uid ? await userRole(user.uid) : null
                 });
             } else {
-                console.log("Usuario no autenticado");
                 setUser({
                     logged: false,
                     email: null,

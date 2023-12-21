@@ -30,10 +30,10 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
-    if (user?.logged) {
+    if (user) {
       router.push('/'); 
     }
-  }, [user?.logged]);
+  }, [user]);
 
   return (
     <div className="w-screen h-screen z-10 flex justify-center items-center">
