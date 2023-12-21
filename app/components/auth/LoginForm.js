@@ -24,7 +24,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    await loginUser(values)
   };
 
   useEffect(() => {
@@ -60,7 +60,6 @@ const LoginForm = () => {
         />
         <Button
           type="submit"
-          onClick={() => loginUser(values)}
           className="bg-white text-amber-400 py-2 px-4 rounded-md mr-4 hover:text-black"
         >
           Ingresar
