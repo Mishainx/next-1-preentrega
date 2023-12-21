@@ -23,6 +23,8 @@ const LoginForm = () => {
     try {
       e.preventDefault();
        await loginUser(values);
+       console.log(await user)
+       console.log(user)
 
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);
@@ -31,9 +33,9 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (user?.logged) {
-      router.push('/');  // Redirige al usuario a la página de inicio una vez que ha iniciado sesión
+      router.push('/'); 
     }
-  }, [user?.logged, router]);
+  }, [user?.logged]);
 
   return (
     <div className="w-screen h-screen z-10 flex justify-center items-center">

@@ -76,29 +76,25 @@ const loginUser = async (values) => {
     };
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        onAuthStateChanged(auth, async(user) => {
+
             if (user) {
                 setUser({
                     logged: true,
                     email: user.email,
                     uid: user.uid,
-                    role: user.uid ? await userRole(user.uid) : null
-                });
-                console.log(user);
+                    role: user.uid?await userRole(user.uid):null
+                })
             } else {
                 setUser({
                     logged: false,
                     email: null,
                     uid: null,
-                    role: null
-                });
-                console.log("no entro");
+                    role:null
+                })
             }
-        });
-    
-        return () => unsubscribe();
-    }, []);
-    
+        })
+    }, [])
 
     return (
         <AuthContext.Provider value={{
