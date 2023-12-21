@@ -50,7 +50,7 @@ export default function Item({ product }) {
       return
     }
 
-    addToCart(user.uid, slug, quantity );
+    await addToCart(user.uid, slug, quantity );
 
     toastNotify();
   };
