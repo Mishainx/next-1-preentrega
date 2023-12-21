@@ -52,7 +52,7 @@ const LoginForm = () => {
           value={values.email}
           required
           placeholder="Tu email"
-          className="p-2 rounded w-full border border-white block my-2"
+          className="p-2 rounded w-full border border-white block mb-2"
           name="email"
           onChange={handleChange}
         />
@@ -61,19 +61,19 @@ const LoginForm = () => {
           value={values.password}
           required
           placeholder="Tu password"
-          className="p-2 rounded w-full border border-white block my-2"
+          className="p-2 rounded w-full border border-white block mb-2"
           name="password"
           onChange={handleChange}
         />
-        <div className="flex flex-col sm:flex-row justify-between sm:justify-start gap-2">
+        <div className="flex flex-col gap-2 mb-2">
           <button
             type="submit"
-            className="bg-white text-amber-400 py-2 px-4 rounded-md hover:text-black w-full sm:w-auto"
+            className="bg-white text-amber-400 py-2 px-4 rounded-md hover:text-black w-full"
           >
             Ingresar
           </button>
           <Link href="/users/register">
-            <a className="bg-white text-amber-400 py-2 px-4 rounded-md hover:text-black w-full sm:w-auto">
+            <a className="bg-white text-amber-400 py-2 px-4 rounded-md hover:text-black w-full text-center">
               Registrarse
             </a>
           </Link>
