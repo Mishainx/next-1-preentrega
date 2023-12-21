@@ -60,7 +60,6 @@ export const CartProvider = ({children}) =>{
     
 
     const addToCart = async (id,item) =>{
-      console.log(id,item)
       const response = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/carts/${id}/products`,{
         method:"POST",
         headers:{
@@ -71,6 +70,8 @@ export const CartProvider = ({children}) =>{
           quantity:item.quantity
         })
       })
+      const data = await response.json();
+      console.log(data);
       getCart(user.uid)
 }
 
